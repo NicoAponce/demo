@@ -35,6 +35,9 @@ const Demo = () => {
             value={name}
             onChange={onChangeName}
          />
+         <input
+            placeholder="BuscarPersona"
+         />
      </div>
     )
 }
