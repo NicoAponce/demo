@@ -1,5 +1,5 @@
 import React from "react";
-import { map, filter, take } from "rxjs/operators";
+import { map, filter, take, tap } from "rxjs/operators";
 import {
   Observable,
   Subject,
@@ -133,6 +133,24 @@ const RxJs = () => {
   timer(1500, 2400)
     .pipe(take(7))
     .subscribe((val) => console.log(`tim: ${val}`));
+
+  /**
+   ************************************************
+   *    Ejemplo sobre tap.
+   ************************************************
+   **/
+  range(4, 5)
+    .pipe(
+      tap((val) => {
+        console.log("antes", val);
+      }),
+      map((val) => val * 10),
+      tap({
+        next: (val) => console.log("despues", val),
+        complete: () => console.log("fin del mundo"),
+      })
+    )
+    .subscribe();
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>

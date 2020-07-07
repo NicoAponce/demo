@@ -1,11 +1,10 @@
 import React from "react";
-import { interval, timer} from "rxjs";
-import {  take } from "rxjs/operators";
+import { range } from "rxjs";
+import { tap, map } from "rxjs/operators";
 import {} from "rxjs/ajax";
 
 const Demo = () => {
-
-    
+  
 
   return (
     <div>
