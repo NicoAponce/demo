@@ -1,5 +1,5 @@
 import React from "react";
-import { map, filter, take, tap } from "rxjs/operators";
+import { map, filter, take, tap, reduce } from "rxjs/operators";
 import {
   Observable,
   Subject,
@@ -151,6 +151,22 @@ const RxJs = () => {
       })
     )
     .subscribe();
+
+  /**
+   ************************************************
+   *    Ejemplo sobre reduce.
+   ************************************************
+   **/
+  interval(100)
+    .pipe(
+      take(10),
+      reduce((acc, cur) => acc + cur)
+    )
+    .subscribe(console.log);
+
+  range(6, 10)
+    .pipe(reduce((acc, cur) => acc + cur))
+    .subscribe(console.log);
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
