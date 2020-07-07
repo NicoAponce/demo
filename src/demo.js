@@ -1,6 +1,6 @@
 import React from "react";
-import { Observable, Subject } from "rxjs";
-import {} from "rxjs/operators";
+import { of } from "rxjs";
+import { map, filter } from "rxjs/operators";
 import {} from "rxjs/ajax";
 
 const Demo = () => {

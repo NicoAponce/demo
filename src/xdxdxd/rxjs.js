@@ -1,6 +1,6 @@
 import React from "react";
 import { map, filter } from "rxjs/operators";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, of } from "rxjs";
 
 const RxJs = () => {
   /**
@@ -75,6 +75,19 @@ const RxJs = () => {
 
   subj$.subscribe((num1) => console.log("num1: ", num1));
   subj$.subscribe((num2) => console.log("num2: ", num2));
+
+  /**
+   ************************************************
+   *    Ejemplo sobre Of.
+   ************************************************
+   **/
+  const uno$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+  uno$
+    .pipe(
+      map((val) => val * 7),
+      filter((val) => val % 2 === 0)
+    )
+    .subscribe(console.log);
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
