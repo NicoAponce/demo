@@ -1,6 +1,6 @@
 import React from "react";
 import { map, filter } from "rxjs/operators";
-import { Observable, Subject, of } from "rxjs";
+import { Observable, Subject, of, fromEvent } from "rxjs";
 
 const RxJs = () => {
   /**
@@ -88,6 +88,18 @@ const RxJs = () => {
       filter((val) => val % 2 === 0)
     )
     .subscribe(console.log);
+
+  /**
+   ************************************************
+   *    Ejemplo sobre FromEvent.
+   ************************************************
+   **/
+  const dos$ = fromEvent(document, "click");
+
+  dos$.subscribe(({ x, y }) => {
+    console.log(`valor de X: ${x},
+     valor de Y: ${y}`);
+  });
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>

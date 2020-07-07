@@ -1,6 +1,6 @@
 import React from "react";
-import { of } from "rxjs";
-import { map, filter } from "rxjs/operators";
+import { fromEvent } from "rxjs";
+import { map } from "rxjs/operators";
 import {} from "rxjs/ajax";
 
 const Demo = () => {
