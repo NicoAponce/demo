@@ -1,6 +1,13 @@
 import React from "react";
 import { map, filter } from "rxjs/operators";
-import { Observable, Subject, of, fromEvent } from "rxjs";
+import {
+  Observable,
+  Subject,
+  of,
+  fromEvent,
+  range,
+  asyncScheduler,
+} from "rxjs";
 
 const RxJs = () => {
   /**
@@ -100,6 +107,17 @@ const RxJs = () => {
     console.log(`valor de X: ${x},
      valor de Y: ${y}`);
   });
+
+  /**
+   ************************************************
+   *    Ejemplo sobre range.
+   ************************************************
+   **/
+  const tres$ = range(7, 10, asyncScheduler);
+
+  console.log("inicio");
+  tres$.subscribe(console.log);
+  console.log("final");
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
