@@ -1,10 +1,11 @@
 import React from "react";
-import { range, asyncScheduler } from "rxjs";
-import {} from "rxjs/operators";
+import { interval, timer} from "rxjs";
+import {  take } from "rxjs/operators";
 import {} from "rxjs/ajax";
 
 const Demo = () => {
-  
+
+    
 
   return (
     <div>

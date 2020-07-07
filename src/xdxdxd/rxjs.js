@@ -1,5 +1,5 @@
 import React from "react";
-import { map, filter } from "rxjs/operators";
+import { map, filter, take } from "rxjs/operators";
 import {
   Observable,
   Subject,
@@ -7,6 +7,8 @@ import {
   fromEvent,
   range,
   asyncScheduler,
+  interval,
+  timer,
 } from "rxjs";
 
 const RxJs = () => {
@@ -118,6 +120,19 @@ const RxJs = () => {
   console.log("inicio");
   tres$.subscribe(console.log);
   console.log("final");
+
+  /**
+   ************************************************
+   *    Ejemplo sobre range.
+   ************************************************
+   **/
+  interval(1000)
+    .pipe(take(15))
+    .subscribe((val) => console.log(`int: ${val}`));
+
+  timer(1500, 2400)
+    .pipe(take(7))
+    .subscribe((val) => console.log(`tim: ${val}`));
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
