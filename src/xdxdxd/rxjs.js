@@ -28,7 +28,32 @@ const RxJs = () => {
     )
     .subscribe(observer);
 
-  
+  /**
+   ************************************************
+   *    Ejemplo sobre unsubscribe.
+   ************************************************
+   **/
+  const obs1$ = new Observable((obs) => {
+    let count = 0;
+    const interval = setInterval(() => {
+      count++;
+      obs.next(count);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      console.log("fin del interval");
+    };
+  });
+
+  const obs1 = obs1$
+    .pipe(map((val) => val * 10))
+    .subscribe((val) => console.log("valor: ", val));
+
+  setTimeout(() => {
+    obs1.unsubscribe();
+    console.log("fin del timeOut");
+  }, 10000);
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
