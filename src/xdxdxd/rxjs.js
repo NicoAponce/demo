@@ -1,6 +1,6 @@
 import React from "react";
 import { map, filter } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 const RxJs = () => {
   /**
@@ -54,6 +54,27 @@ const RxJs = () => {
     obs1.unsubscribe();
     console.log("fin del timeOut");
   }, 10000);
+
+  /**
+   ************************************************
+   *    Ejemplo sobre Subject.
+   ************************************************
+   **/
+  const obs2$ = new Observable((subs) => {
+    const lol = setInterval(() => {
+      subs.next(Math.random());
+    }, 3000);
+
+    return () => {
+      clearInterval(lol);
+    };
+  });
+
+  const subj$ = new Subject();
+  obs2$.subscribe(subj$);
+
+  subj$.subscribe((num1) => console.log("num1: ", num1));
+  subj$.subscribe((num2) => console.log("num2: ", num2));
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
