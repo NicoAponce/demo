@@ -1,5 +1,14 @@
 import React from "react";
-import { map, filter, take, tap, reduce, scan, first } from "rxjs/operators";
+import {
+  map,
+  filter,
+  take,
+  tap,
+  reduce,
+  scan,
+  first,
+  takeWhile,
+} from "rxjs/operators";
 import {
   Observable,
   Subject,
@@ -193,6 +202,21 @@ const RxJs = () => {
     .pipe(
       map(({ x, y }) => ({ x, y })),
       first((val) => val.x <= 10)
+    )
+    .subscribe({
+      next: (val) => console.log("next: ", val),
+      complete: () => console.log("fin del mundo"),
+    });
+
+  /**
+   ************************************************
+   *    Ejemplo sobre takewhile.
+   ************************************************
+   **/
+  fromEvent(document, "click")
+    .pipe(
+      map(({ x, y }) => ({ x, y })),
+      takeWhile((val) => val.x >= 20, true)
     )
     .subscribe({
       next: (val) => console.log("next: ", val),
