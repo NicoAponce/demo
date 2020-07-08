@@ -8,6 +8,7 @@ import {
   scan,
   first,
   takeWhile,
+  takeUntil,
 } from "rxjs/operators";
 import {
   Observable,
@@ -218,6 +219,24 @@ const RxJs = () => {
       map(({ x, y }) => ({ x, y })),
       takeWhile((val) => val.x >= 20, true)
     )
+    .subscribe({
+      next: (val) => console.log("next: ", val),
+      complete: () => console.log("fin del mundo"),
+    });
+
+  /**
+   ************************************************
+   *    Ejemplo sobre takeuntil.
+   ************************************************
+   **/
+  const button = document.createElement("button");
+  button.innerHTML = "detener";
+  document.querySelector("body").append(button);
+
+  const click$ = fromEvent(button, "click");
+
+  interval(1000)
+    .pipe(takeUntil(click$))
     .subscribe({
       next: (val) => console.log("next: ", val),
       complete: () => console.log("fin del mundo"),
