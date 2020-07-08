@@ -9,6 +9,7 @@ import {
   first,
   takeWhile,
   takeUntil,
+  distinct,
 } from "rxjs/operators";
 import {
   Observable,
@@ -19,6 +20,7 @@ import {
   asyncScheduler,
   interval,
   timer,
+  from,
 } from "rxjs";
 
 const RxJs = () => {
@@ -241,6 +243,43 @@ const RxJs = () => {
       next: (val) => console.log("next: ", val),
       complete: () => console.log("fin del mundo"),
     });
+
+  /**
+   ************************************************
+   *    Ejemplo sobre distinct.
+   ************************************************
+   **/
+  const person = [
+    {
+      name: "nicolas",
+      age: 22,
+      sex: "M",
+    },
+    {
+      name: "Carlos",
+      age: 21,
+      sex: "M",
+    },
+    {
+      name: "Maria",
+      age: 22,
+      sex: "F",
+    },
+    {
+      name: "Fer",
+      age: 20,
+      sex: "F",
+    },
+    {
+      name: "Maria",
+      age: 21,
+      sex: "F",
+    },
+  ];
+
+  from(person)
+    .pipe(distinct((val) => val.name))
+    .subscribe(console.log);
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
