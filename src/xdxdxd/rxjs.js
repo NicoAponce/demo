@@ -11,6 +11,8 @@ import {
   takeUntil,
   distinct,
   distinctUntilChanged,
+  debounceTime,
+  pluck,
 } from "rxjs/operators";
 import {
   Observable,
@@ -298,6 +300,21 @@ const RxJs = () => {
 
   from(colors)
     .pipe(distinctUntilChanged((act, des) => act.name === des.name))
+    .subscribe(console.log);
+
+  /**
+   ************************************************
+   *    Ejemplo sobre debouncetime.
+   ************************************************
+   **/
+  fromEvent(document, "click").pipe(debounceTime(10000)).subscribe(console.log);
+
+  const input = document.createElement("input");
+  const body = document.querySelector("body");
+  body.append(input);
+
+  fromEvent(input, "keyup")
+    .pipe(pluck("target", "value"), debounceTime(1000), distinctUntilChanged())
     .subscribe(console.log);
   return (
     <div>
