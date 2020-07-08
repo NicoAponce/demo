@@ -14,6 +14,7 @@ import {
   debounceTime,
   pluck,
   throttleTime,
+  sample,
 } from "rxjs/operators";
 import {
   Observable,
@@ -340,6 +341,15 @@ const RxJs = () => {
       next: (val) => console.log("next: ", val),
       complete: () => console.log("fin del mundo"),
     });
+
+  /**
+   ************************************************
+   *    Ejemplo sobre sample.
+   ************************************************
+   **/
+  const lol$ = fromEvent(document, "click");
+
+  interval(500).pipe(sample(lol$)).subscribe(console.log);
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
