@@ -13,6 +13,7 @@ import {
   distinctUntilChanged,
   debounceTime,
   pluck,
+  throttleTime,
 } from "rxjs/operators";
 import {
   Observable,
@@ -316,6 +317,29 @@ const RxJs = () => {
   fromEvent(input, "keyup")
     .pipe(pluck("target", "value"), debounceTime(1000), distinctUntilChanged())
     .subscribe(console.log);
+
+  /**
+   ************************************************
+   *    Ejemplo sobre throttleTime.
+   ************************************************
+   **/
+  const input$ = document.createElement("input");
+  const body$ = document.querySelector("body");
+  body$.append(input$);
+
+  fromEvent(input, "keyup")
+    .pipe(
+      throttleTime(1000, asyncScheduler, {
+        leading: false,
+        trailing: true,
+      }),
+      pluck("target", "value"),
+      distinctUntilChanged()
+    )
+    .subscribe({
+      next: (val) => console.log("next: ", val),
+      complete: () => console.log("fin del mundo"),
+    });
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>
