@@ -10,6 +10,7 @@ import {
   takeWhile,
   takeUntil,
   distinct,
+  distinctUntilChanged,
 } from "rxjs/operators";
 import {
   Observable,
@@ -279,6 +280,24 @@ const RxJs = () => {
 
   from(person)
     .pipe(distinct((val) => val.name))
+    .subscribe(console.log);
+
+  /**
+   ************************************************
+   *    Ejemplo sobre distinctUntilChanged.
+   ************************************************
+   **/
+  const colors = [
+    { name: "rojo" },
+    { name: "azul" },
+    { name: "rojo" },
+    { name: "rojo" },
+    { name: "verde" },
+    { name: "azul" },
+  ];
+
+  from(colors)
+    .pipe(distinctUntilChanged((act, des) => act.name === des.name))
     .subscribe(console.log);
   return (
     <div>
