@@ -1,5 +1,5 @@
 import React from "react";
-import { map, filter, take, tap, reduce, scan } from "rxjs/operators";
+import { map, filter, take, tap, reduce, scan, first } from "rxjs/operators";
 import {
   Observable,
   Subject,
@@ -183,6 +183,21 @@ const RxJs = () => {
   range(4, 10)
     .pipe(scan((acc, cur) => acc + cur))
     .subscribe((val) => console.log(`range: ${val}`));
+
+  /**
+   ************************************************
+   *    Ejemplo sobre first.
+   ************************************************
+   **/
+  fromEvent(document, "click")
+    .pipe(
+      map(({ x, y }) => ({ x, y })),
+      first((val) => val.x <= 10)
+    )
+    .subscribe({
+      next: (val) => console.log("next: ", val),
+      complete: () => console.log("fin del mundo"),
+    });
   return (
     <div>
       <h1>Esto son ejemplos pra no olvidarme de RxJs</h1>

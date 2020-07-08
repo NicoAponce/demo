@@ -1,6 +1,6 @@
 import React from "react";
-import { range, interval } from "rxjs";
-import { scan, take } from "rxjs/operators";
+import { range, interval, fromEvent } from "rxjs";
+import { scan, take, map, first } from "rxjs/operators";
 import {} from "rxjs/ajax";
 
 const Demo = () => {
